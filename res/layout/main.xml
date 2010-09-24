@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	android:id="@+id/widget56"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	>
+
+	<TextView
+		android:id="@+id/read"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="40px"
+		android:text="TextView"
+		android:textSize="72sp"
+		android:layout_centerVertical="true"
+		android:layout_centerHorizontal="true"
+		/>
+
+	<LinearLayout
+		android:id="@+id/widget57"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_centerHorizontal="true"
+		>
+
+		<ImageButton
+			android:id="@+id/backward"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:background="@color/black"
+			android:src="@drawable/backward"
+			/>
+
+		<ImageButton
+			android:id="@+id/play"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="40px"
+			android:layout_marginRight="40px"
+			android:background="@color/black"
+			android:src="@drawable/play"
+			/>
+
+		<ImageButton
+			android:id="@+id/forward"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:background="@color/black"
+			android:src="@drawable/forward"
+			/>
+
+	</LinearLayout>
+</RelativeLayout>

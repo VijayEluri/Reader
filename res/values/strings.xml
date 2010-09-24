@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, Reader!</string>
+    <string name="app_name">Reader</string>
+    <string name="backward_title">Backward Skip Amount</string>
+    <string name="forward_title">Forward Skip Amount</string>
+    <string name="speed_title">Words Per Minute</string>
+    <string name="okay">Okay</string>
+    <string name="cancel">Cancel</string>
+    <string name="loading">Loading Document. Please Wait.</string>
+</resources>
