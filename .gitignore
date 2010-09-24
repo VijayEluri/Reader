@@ -1,0 +1,4 @@
+#Git Ignored Filed
+
+#All .class files
+*.class
