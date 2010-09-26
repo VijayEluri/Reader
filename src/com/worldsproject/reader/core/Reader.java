@@ -2,16 +2,16 @@ package com.worldsproject.reader.core;
 
 import java.io.File;
 
-import com.worldsproject.reader.core.R;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Message;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -40,6 +40,8 @@ public class Reader extends Activity implements View.OnClickListener
 	private final int FORWARD_DIALOG = 0;
 	private final int BACKWARD_DIALOG = 1;
 	private final int SPEED_DIALOG = 2;
+	
+	ProgressDialog dialog = null;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -120,10 +122,11 @@ public class Reader extends Activity implements View.OnClickListener
 			this.onCreateDialog(this.SPEED_DIALOG);
 			return true;
 		case R.id.chooseFile:
-			ProgressDialog dialog = ProgressDialog.show(this, "", getString(R.string.loading), true);
-			dialog.show();
-			wl = new WordLoader(new File(Environment.getExternalStorageDirectory(), "test.txt"));
-			dialog.dismiss();
+			dialog =ProgressDialog.show(this, "", getString(R.string.loading), true);
+			wl = new WordLoader(new File(Environment.getExternalStorageDirectory(), "test.txt"), bobby);
+			Thread thread = new Thread(wl);
+			thread.start();
+			return true;
 		default: return false; 
 		}
 	}
@@ -189,15 +192,25 @@ public class Reader extends Activity implements View.OnClickListener
 		hand.removeCallbacks(runner);
 		play.setImageResource(R.drawable.play);
 	}
-	
+
 	private void play()
 	{
 		hand.post(runner);
 		play.setImageResource(R.drawable.pause);
 	}
-	
+
 	private void updateWord()
 	{
 		read.setText(wl.getWord());
 	}
+
+	private Handler bobby = new Handler()
+	{
+		@Override
+		public void handleMessage(Message msg) 
+		{
+			dialog.dismiss();
+		}
+
+	};
 }

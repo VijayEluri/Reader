@@ -6,29 +6,46 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class WordLoader
+import android.os.Handler;
+import android.os.Message;
+
+public class WordLoader implements Runnable
 {
 	private File file = null;
-	private String[] defaultText = {"Ready", "one", "two","three", "four", "five", "six", "seven", "eight", "nine", "ten", "elevin", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"};
 	private int location = -1;
 
 	private int forwardsAmount = 10;
 	private int backwardsAmount = 10;
 
-	private ArrayList<String> words = new ArrayList<String>();
+	private ArrayList<String> words = new ArrayList<String>(4);
+	
+	private Handler hand = null;
 
 	public WordLoader()
 	{
-
+		words.add("one");
+		words.add("two");
+		words.add("three");
+		words.add("four");
+		words.add("five");
+		words.add("six");
 	}
 
-	public WordLoader(File f)
+	public WordLoader(File f, Handler h)
 	{
-		if(f!= null)
+		file = f;
+		hand = h;
+	}
+	
+	public void run() 
+	{
+		if(file != null)
 		{
+//			words.clear();
+			
 			try 
 			{
-				BufferedReader buf = new BufferedReader(new FileReader(f));
+				BufferedReader buf = new BufferedReader(new FileReader(file));
 
 				String line = null;
 
@@ -52,13 +69,8 @@ public class WordLoader
 				e.printStackTrace();
 			}
 		}
-		else
-		{
-			for(String s : defaultText)
-			{
-				words.add(s);
-			}
-		}
+		
+		hand.dispatchMessage(new Message());
 	}
 
 	public void nextWord()
@@ -70,6 +82,7 @@ public class WordLoader
 
 	public String getWord()
 	{
+		checkLocation();
 		return words.get(location);
 	}
 
